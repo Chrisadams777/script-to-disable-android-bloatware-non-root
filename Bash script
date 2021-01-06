@@ -1,0 +1,1136 @@
+
+
+Code:
+#!/usr/bin/env bash
+
+# ======================================================
+
+# INFO {{{
+
+# search packages 
+# adb shell pm list packages | grep package
+
+# DISABLE/ENABLE
+# + can be undone without factory reset
+# + packages remain disabled
+# adb shell pm disable-user --user 0 <package name>
+# adb shell pm enable --user 0 <package name> 
+
+# UNINSTALL/INSTALL
+# + high change reinstall would not work, needs factory reset
+# + packages get reinstalled (?)
+# adb shell pm uninstall -k --user 0 <package name>
+# adb shell pm package install-existing <package name>
+
+# INFO }}}
+
+# ======================================================
+
+# Obvious Bloatware {{{
+
+# MICROSOFT
+# ========
+
+adb shell pm disable-user --user 0 com.microsoft.skydrive
+adb shell pm disable-user --user 0 com.microsoft.office.excel
+adb shell pm disable-user --user 0 com.microsoft.office.word
+adb shell pm disable-user --user 0 com.microsoft.office.powerpoint
+
+
+# FACEBOOK
+# ========
+
+# Facebook App Installer
+adb shell pm disable-user --user 0 com.facebook.system
+# Facebook App Manager
+adb shell pm disable-user --user 0 com.facebook.appmanager
+# Facebook
+adb shell pm disable-user --user 0 com.facebook.katana
+# Facebook Services
+adb shell pm disable-user --user 0 com.facebook.services
+
+
+# FONTS
+# =====
+
+adb shell pm disable-user --user 0 com.monotype.android.font.chococooky
+adb shell pm disable-user --user 0 com.monotype.android.font.cooljazz
+adb shell pm disable-user --user 0 com.monotype.android.font.rosemary
+
+
+# WIDGETS
+# =======
+
+# Favourite Contacts
+adb shell pm disable-user --user 0 com.sec.android.widgetapp.easymodecontactswidget
+# Galaxy
+adb shell pm disable-user --user 0 com.sec.android.widgetapp.samsungapps
+
+
+# GAME
+# ====
+
+# Game Launcher
+adb shell pm disable-user --user 0 com.samsung.android.game.gamehome
+# Game Optimizing Service
+adb shell pm disable-user --user 0 com.enhance.gameservice
+# Game Tools
+adb shell pm disable-user --user 0 com.samsung.android.game.gametools
+
+
+# SAMSUNG
+# =======
+
+# Edge Panels/Screen/Lighting
+#
+# + since disabling the edge screen, disables the lighting
+#   and I want to keep lighting, I'm leaving the apps panel
+#   enabled, since it could be useful and the screen enabled
+# + sbrowseredge disables samsung internet as well ?!
+#
+# Edge Panels
+adb shell pm disable-user --user 0 com.samsung.android.app.sbrowseredge
+adb shell pm disable-user --user 0 com.samsung.android.widgetapp.yahooedge.finance
+adb shell pm disable-user --user 0 com.samsung.android.widgetapp.yahooedge.sport
+adb shell pm disable-user --user 0 com.samsung.android.app.taskedge
+adb shell pm disable-user --user 0 com.samsung.android.app.clipboardedge
+adb shell pm disable-user --user 0 com.samsung.android.service.peoplestripe
+adb shell pm disable-user --user 0 com.sec.android.app.quicktool
+# adb shell pm disable-user --user 0 com.samsung.android.app.appsedge
+#
+# Edge Screen/Lighting
+# adb shell pm disable-user --user 0 com.samsung.android.app.cocktailbarservice
+
+# Assistant Menu
+#
+# + bubble that hels you navigate
+#
+adb shell pm disable-user --user 0 com.samsung.android.app.assistantmenu
+
+# Autofill with Samsung Pass
+#
+# + for web login, only works with Samsung internet
+#
+adb shell pm disable-user --user 0 com.samsung.android.samsungpassautofill
+
+# Interactive ScreenSaver
+#
+adb shell pm disable-user --user 0 com.android.dreams.basic
+adb shell pm disable-user --user 0 com.samsung.daydream.customization
+adb shell pm disable-user --user 0 com.android.dreams.phototable
+
+# CarmodeStub
+#
+# + car mode that does not support Google maps/waze
+#
+adb shell pm disable-user --user 0 com.samsung.android.drivelink.stub
+
+# Link Sharing
+#
+# + share large files up to 2 gb a day, but only to other Samsung accounts
+#
+adb shell pm disable-user --user 0 com.samsung.android.app.simplesharing
+
+# Live Message
+#
+# + write animated message
+#
+adb shell pm disable-user --user 0 com.samsung.android.service.livedrawing
+
+# Samsung Smart Switch
+#
+# + transfer from your old device
+#
+# - Smart Switch Agent
+adb shell pm disable-user --user 0 com.sec.android.easyMover.Agent
+# - Smart Switch
+adb shell pm disable-user --user 0 com.sec.android.easyMover
+
+# Universal switch
+#
+# - accessiblity option, use a periferal for touching
+#
+adb shell pm disable-user --user 0 com.samsung.android.universalswitch
+
+# Samsung notes
+adb shell pm disable-user --user 0 com.samsung.android.app.notes
+
+# Samsung apps widdget
+adb shell pm disable-user --user 0 com.sec.android.widgetapp.samsungapps
+
+# Kids Home Installer
+adb shell pm disable-user --user 0 com.samsung.android.kidsinstaller
+
+# File manager
+adb shell pm disable-user --user 0 com.sec.android.app.myfiles
+
+# Samsung Themes
+#
+# + since I'm not uninstalling Samsung Experience Home
+#   I am keeping this one, useful for changing AOD icons
+#
+# - Theme Store
+#    + it enables itself, should uninstall?: pm uninstall --user 0 com.samsung.android.themestore
+# adb shell pm disable-user --user 0 com.samsung.android.themestore
+# - Themes
+# adb shell pm disable-user --user 0 com.samsung.android.themecenter
+
+# Samsung PaymentFramework
+#
+# + it depends on NFC, if NFC is disabled, this should be as well
+#
+adb shell pm disable-user --user 0 com.samsung.android.spayfw
+
+# Samsung clipboard
+#
+# + does not affect android clipboard
+#
+adb shell pm disable-user --user 0 com.samsung.clipboardsaveservice
+adb shell pm disable-user --user 0 com.samsung.android.clipboarduiservice
+
+# Samsung Billing
+adb shell pm disable-user --user 0 com.sec.android.app.billing
+
+# Samsung Galaxy Friends
+adb shell pm disable-user --user 0 com.samsung.android.mateagent
+
+# Samsung Pass
+adb shell pm disable-user --user 0 com.samsung.android.samsungpass
+
+# Samsung Health Service
+adb shell pm disable-user --user 0 com.sec.android.service.health
+
+# Bixby
+#
+# + BxActions needs ".agent" enabled and, if you want double press as well ".spage"
+# + Button Mapper, has no problems
+#
+# - Bixby Home
+#   + you might want to uninstall this one instead as it enables itself
+#   + adb shell pm uninstall -k --user 0 com.samsung.android.app.spage
+adb shell pm disable-user --user 0 com.samsung.android.app.spage
+# - Bixby Service
+adb shell pm disable-user --user 0 com.samsung.android.bixby.service
+# - Bixby Voice
+adb shell pm disable-user --user 0 com.samsung.android.bixby.agent
+# - Bixby Voice Stub
+adb shell pm disable-user --user 0 com.samsung.android.bixby.agent.dummy
+# - Bixby voice wake-up
+adb shell pm disable-user --user 0 com.samsung.android.bixby.wakeup
+#
+# Briefing
+adb shell pm disable-user --user 0 flipboard.boxer.app
+#
+# Bixby Vision
+# - BixbyVision Framework
+# adb shell pm disable-user --user 0 com.samsung.android.bixbyvision.framework
+# - Bixby Vision
+# adb shell pm disable-user --user 0 com.samsung.android.visionintelligence
+
+
+# GOOGLE
+# ======
+
+# Market Feedback Agent 
+#
+# + ask for feedback
+# + https://androidforums.com/threads/market-feedback-agent.686798/
+#
+adb shell pm disable-user --user 0 com.google.android.feedback
+
+# Google One Time Init
+#
+# + triggered when the phone is started for the first time
+#
+adb shell pm disable-user --user 0 com.google.android.onetimeinitializer
+
+# Duo
+adb shell pm disable-user --user 0 com.google.android.apps.tachyon
+
+
+# ANDROID
+# ======
+
+# Easter Egg
+#
+# + it hides some easter eggs for users to find
+#
+adb shell pm disable-user --user 0  com.android.egg
+
+# Magnify
+#
+# + magnifies screen, accessiblity feature
+#
+adb shell pm disable-user --user 0 com.samsung.android.app.readingglass
+
+# Work profile setup
+#
+# + https://support.google.com/work/android/answer/6191949?hl=en
+# + requires enterprise subscription, not for end-user
+#
+adb shell pm disable-user --user 0 com.android.managedprovisioning
+
+
+# Obvious Bloatware }}}
+
+# ======================================================
+
+# Apps {{{
+
+# GOOGLE
+# ======
+
+# Google
+# adb shell pm disable-user --user 0 com.google.android.googlequicksearchbox
+
+# Chrome
+# adb shell pm disable-user --user 0 com.android.chrome
+# adb shell pm disable-user --user 0 com.sec.android.app.chromecustomizations
+
+# Gmail
+adb shell pm disable-user --user 0 com.google.android.gm
+
+# Youtube
+# adb shell pm disable-user --user 0 com.google.android.youtube
+
+# Maps
+# adb shell pm disable-user --user 0 com.google.android.apps.maps
+
+# Docs
+# adb shell pm disable-user --user 0 com.google.android.apps.docs
+
+
+# Videos
+# adb shell pm disable-user --user 0 com.google.android.videos
+
+# Music
+adb shell pm disable-user --user 0 com.google.android.music
+
+# Photos
+# adb shell pm disable-user --user 0 com.google.android.apps.photos
+
+
+# SAMSUNG
+# =======
+
+# DeX
+#
+# - DeX community
+# adb shell pm disable-user --user 0 com.sec.android.desktopcommunity
+# - Samsung DeX
+# adb shell pm disable-user --user 0 com.sec.android.desktopmode.uiservice
+# - Samsung DeX Home
+# adb shell pm disable-user --user 0 com.sec.android.app.desktoplauncher
+# - Samsung DeX System UI
+# adb shell pm disable-user --user 0 com.samsung.desktopsystemui
+
+# Dual Messenger
+#
+# + use dual accounts for same app
+#
+# adb shell pm disable-user --user 0 com.samsung.android.da.daagent
+
+# Samsung Cloud #
+# adb shell pm disable-user --user 0 com.samsung.android.scloud
+
+# Knox/Secure folder
+#
+# - Knox Analytics Uploader
+# adb shell pm disable-user --user 0 com.samsung.android.knox.analytics.uploader
+# - Knox Enrollment Service #
+# adb shell pm disable-user --user 0 com.sec.enterprise.knox.cloudmdm.smdms
+# - Knox Key Chain
+# adb shell pm disable-user --user 0 com.samsung.knox.keychain
+# - KnoxBBCProvider
+# adb shell pm disable-user --user 0 com.samsung.android.bbc.fileprovider
+# - KnoxCore
+# adb shell pm disable-user --user 0 com.samsung.android.knox.containercore
+# - KnoxVpnPacProcessor
+# adb shell pm disable-user --user 0 com.knox.vpn.proxyhandler
+# - SharedDeviceKeyguard
+# adb shell pm disable-user --user 0 com.sec.enterprise.knox.shareddevice.keyguard
+# - Secure Folder
+# adb shell pm disable-user --user 0 com.samsung.knox.securefolder
+# - Secure your stuff
+# adb shell pm disable-user --user 0 com.samsung.knox.securefolder.setuppage
+
+# Samsung capture
+#
+# + screen capture functionality, write on screen etc
+#
+# adb shell pm disable-user --user 0 com.samsung.android.app.smartcapture
+
+# Air Command related apps
+#
+# + since disabling air command bring a lot of trouble, I should leave some air command apps
+#
+# - Glance & Magnify
+#   + kinda cool https://www.youtube.com/watch?v=bugnDWtKTZM
+# adb shell pm disable-user --user 0 com.samsung.android.service.pentastic
+# adb shell pm disable-user --user 0 com.samsung.android.app.readingglass
+# -  Air View Translate
+# adb shell pm disable-user --user 0 com.samsung.android.service.airviewdictionary
+
+# Apps }}}
+
+# ======================================================
+
+# Services I might need {{{
+
+# SAMSUNG
+# ======
+
+# Gear VR Service
+# adb shell pm disable-user --user 0 com.samsung.android.hmt.vrsvc
+
+# Remote Mobile Manager
+#
+# + customize my phone remotely ?
+# + need testing
+#
+# adb shell pm disable-user --user 0 com.samsung.android.rlc
+
+# LED Case
+#
+# - LED Cover Service
+# adb shell pm disable-user --user 0 com.sec.android.cover.ledcover
+# - LED icon editor
+# adb shell pm disable-user --user 0 com.samsung.android.app.ledcoverdream
+
+# Wi-Fi Direct
+# adb shell pm disable-user --user 0 com.samsung.android.allshare.service.fileshare
+# adb shell pm disable-user --user 0 com.samsung.android.allshare.service.mediashare
+
+# Blue light filter
+# adb shell pm disable-user --user 0 com.samsung.android.bluelightfilter
+
+
+# GOOGLE
+# ======
+
+# VR related
+#
+# + needed for Gear VR as well
+#
+# - VR SDK
+# adb shell pm disable-user --user 0 com.google.ar.core
+# - Google VR Services
+# adb shell pm disable-user --user 0 com.google.vr.vrcore
+
+# OK Google related
+#
+# - TTS
+#   + possible OK Google requirement
+# adb shell pm disable-user --user 0 com.google.android.tts
+# - OK Google enrollment
+# adb shell pm disable-user --user 0 com.android.hotwordenrollment.okgoogle
+# - X Google enrollment
+# adb shell pm disable-user --user 0 com.android.hotwordenrollment.xgoogle
+
+
+# ANDROID
+# =======
+
+# NFC
+#
+# + should not be deleted, there is no background activity if not used
+#
+# - Beaming Service
+#   + share data between NFC devices
+# adb shell pm disable-user --user 0 com.mobeam.barcodeService
+# - BCService
+#   + required by certain features, has something to do with NFC
+# adb shell pm disable-user --user 0 com.sec.bcservice
+# - NFC
+# adb shell pm disable-user --user 0 com.android.nfc
+# - Tags
+# adb shell pm disable-user --user 0 com.android.apps.tag
+
+# ANT Related
+#
+# + radio functionality required by fitness apps
+# + certain infrared stuff (remote etc)
+# - ANT + DUT
+# adb shell pm disable-user --user 0 com.dsi.ant.sample.acquirechannels
+# - ANT HAL Service #
+# adb shell pm disable-user --user 0 com.dsi.ant.server
+# - ANT Radio Service #
+# adb shell pm disable-user --user 0 com.dsi.ant.service.socket
+# - ANT+ Plugins Service #
+# adb shell pm disable-user --user 0 com.dsi.ant.plugins.antplus
+
+# User Dictionary
+#
+# + user installed dictionary
+#
+# adb shell pm disable-user --user 0 com.android.providers.userdictionary
+
+# Dictionary
+#
+# + built in dictionary, to lookup words
+#
+# adb shell pm disable-user --user 0 com.diotek.sec.lookup.dictionary
+
+# EasyOneHand #
+# * one handed mode for android, usefull on big screens
+# adb shell pm disable-user --user 0 com.sec.android.easyonehand
+
+# Services I might need }}}
+
+# ======================================================
+
+# Vital Services {{{
+
+# SAMSUNG
+# =======
+
+# Bluetooth
+# adb shell pm disable-user --user 0 com.sec.knox.bluetooth
+
+# wssyncmlnps
+#
+# + Samsung update service, Backup and restore Manager
+#
+# adb shell pm disable-user --user 0 com.wssnps
+
+
+# GOOGLE
+# ======
+
+# Google Backup Transport
+#
+# + backup service that backs up your apps every night to Google Drive
+#
+# adb shell pm disable-user --user 0 com.google.android.backuptransport
+
+# Google Calender Sync
+#
+# + calendar sync to Google account
+#
+# adb shell pm disable-user --user 0 com.google.android.syncadapters.calendar
+
+# Google Contacts Sync
+#
+# + contacts sync to Google account
+#
+# adb shell pm disable-user --user 0 com.google.android.syncadapters.contacts
+
+# Google Partner Setup
+#
+# + un applications in conjunction with Google products (save on drive etc)
+#
+# adb shell pm disable-user --user 0 com.google.android.partnersetup
+
+
+# ANDROID
+# =======
+
+# CaptivePortalLogin
+#
+# + connect to Wifi, need login (ex Starbucks), captiveportallogin which lightweight web browser to specifically process the page where you agree to the terms of using the network.
+#
+# adb shell pm disable-user --user 0 com.android.captiveportallogin
+
+# Vital Services }}}
+
+# ======================================================
+
+# Unknown consequences {{{
+
+# SAMSUNG
+# =======
+
+# Samsung ApexService
+# adb shell pm disable-user --user 0 com.sec.android.app.apex
+
+# Samsung Auto Installs
+adb shell pm disable-user --user 0 android.autoinstalls.config.samsung
+
+# Samsung SetupWizard #
+adb shell pm disable-user --user 0 com.sec.android.app.SecSetupWizard
+
+# Intelligent Scan
+# adb shell pm disable-user --user 0 com.samsung.android.biometrics.service
+
+# Iris
+# adb shell pm disable-user --user 0 com.samsung.android.server.iris
+
+# KLMS Agent
+# adb shell pm disable-user --user 0 com.samsung.klmsagent
+
+# Live Wallpaper Picker
+# adb shell pm disable-user --user 0 com.android.wallpaper.livepicker
+
+# SamsungDLPService
+#
+# + Samsung data loss prevention service
+#
+# adb shell pm disable-user --user 0 com.samsung.android.dlp.service
+
+# ShortcutBNR
+adb shell pm disable-user --user 0 com.samsung.android.shortcutbackupservice
+
+# SKMSAgentService
+# + related to NFC
+# + https://forums.androidcentral.com/ask-question/844087-what-skms-agent-service.html
+adb shell pm disable-user --user 0 com.skms.android.agent
+
+# SmartFaceService
+# + might be related to iris?
+# adb shell pm disable-user --user 0 com.samsung.android.smartface
+
+# Samsung text-to-speech engine
+#
+# + for application that require Samsung TTS
+#
+adb shell pm disable-user --user 0 com.samsung.SMT
+
+#  Samsung Sticker
+#
+# - StickerCenter
+adb shell pm disable-user --user 0 com.samsung.android.stickercenter
+# - StickerProvider
+adb shell pm disable-user --user 0 com.samsung.android.provider.stickerprovider
+
+# StoryService
+#
+# + related to gallery
+#
+adb shell pm disable-user --user 0 com.samsung.storyservice
+
+# Voice service #
+adb shell pm disable-user --user 0 com.samsung.svoice.sync
+
+# Voice Assistant #
+adb shell pm disable-user --user 0 com.samsung.android.app.talkback
+
+# IMS Settings #
+# adb shell pm disable-user --user 0 com.samsung.advp.imssettings
+
+# Nearby Service #
+# adb shell pm disable-user --user 0 com.samsung.android.allshare.service.mediashare
+
+# Facial Recognition
+# adb shell pm disable-user --user 0 com.samsung.android.bio.face.service
+
+# Samsung Face Service
+#
+# + I think it detects faces in photos
+#
+# adb shell pm disable-user --user 0 com.samsung.faceservice
+
+# Samsung camera related
+#
+# - Default 3D live stickers
+# adb shell pm disable-user --user 0 com.samsung.android.app.camera.sticker.facear3d.preload
+# - Default frames
+# adb shell pm disable-user --user 0 com.samsung.android.app.camera.sticker.facearframe.preload
+# - Default Print Service
+# adb shell pm disable-user --user 0 com.android.bips
+# - My Emoji Maker
+# adb shell pm disable-user --user 0 com.sec.android.app.camera.avatarauth
+
+
+# GOOGLE
+# ======
+
+# ConfigUpdater
+#
+# + auto updates certificates, firewall configuration, time zone info
+#
+# adb shell pm disable-user --user 0 com.google.android.configupdater
+
+
+# ANDROID
+# =======
+
+# Call Log Backup/Restore #
+# adb shell pm disable-user --user 0 com.android.calllogbackup
+
+# Wallpaper Backup #
+# adb shell pm disable-user --user 0 com.android.wallpaperbackup
+
+# Emergency information #
+# adb shell pm disable-user --user 0 com.android.emergency
+
+# EmergencyManagerService #
+# adb shell pm disable-user --user 0 com.sec.android.emergencymode.service
+
+# EmergencyProvider #
+# adb shell pm disable-user --user 0 com.sec.android.provider.emergencymode
+
+# Enterprise Sim Pin Service #
+# adb shell pm disable-user --user 0 com.sec.enterprise.mdm.services.simpin
+
+# Enterprise VPN Services #
+# adb shell pm disable-user --user 0 com.sec.enterprise.mdm.vpn
+
+# EpdgTestApp #
+# https://forums.androidcentral.com/samsung-galaxy-s8-and-s8-plus/883829-what-epdgtestapp-s8-phone.html
+# adb shell pm disable-user --user 0 com.sec.epdgtestapp
+
+# Perso #
+# adb shell pm disable-user --user 0 com.sec.android.app.personalization
+
+# Print Service Recommendation Service #
+# adb shell pm disable-user --user 0 com.google.android.printservice.recommendation
+
+# Print Spooler #
+# adb shell pm disable-user --user 0 com.android.printspooler
+
+# UIBCVirtualSoftkey #
+# adb shell pm disable-user --user 0 com.sec.android.uibcvirtualsoftkey
+
+# Automation Test #
+adb shell pm disable-user --user 0 com.sec.android.app.DataCreate
+
+# Bookmark Provider #
+# adb shell pm disable-user --user 0 com.android.bookmarkprovider
+
+# Partner Bookmarks #
+# adb shell pm disable-user --user 0 com.android.providers.partnerbookmarks
+
+# Foundation Font
+#
+# + unknown importance
+#
+# adb shell pm disable-user --user 0 com.monotype.android.font.foundation
+
+# Backup Confirm
+#
+# + confirmation for a legitimate backup
+#
+# adb shell pm disable-user --user 0 com.android.backupconfirm
+
+# Dolby Atmos Feature
+# adb shell pm disable-user --user 0 com.sec.android.app.soundalive
+
+# Unknown consequences }}}
+
+# ======================================================
+
+# PROBLEMS {{{
+
+# Device Maitenance
+#
+# + a lot of issues
+#
+# adb shell pm disable-user --user 0 com.samsung.android.sm.devicesecurity
+# adb shell pm disable-user --user 0 com.samsung.android.sm.policy
+# adb shell pm disable-user --user 0 com.samsung.android.lool
+
+# Samsung Experience Service
+#
+# + DON'T if you are using a Samsung Account
+# + OK if you don't
+#
+# adb shell pm disable-user --user 0 com.samsung.android.mobileservice
+
+# Samsung Experience Home
+#
+# + if you use Full Screen Gestures in the settings, the "recent apps gesture" won't work
+# + if you use normal nav bar, it's okay
+#
+# adb shell pm disable-user --user 0 com.sec.android.app.desktoplauncher
+# - Finder
+#   + search engine for Samsung Home Experience home
+#   + disable only if you disable the launcher as well
+# adb shell pm disable-user --user 0 com.samsung.android.app.galaxyfinder
+
+# Android-ss-service-lib
+#
+# + caller ID and spam identification for calls
+#
+# adb shell pm disable-user --user 0 com.hiya.star
+
+# Device Quality Agent
+#
+# + checks Wifi Quality
+# + https://forum.xda-developers.com/galaxy-s8/help/device-quality-agent-t3595653
+#
+# adb shell pm disable-user --user 0 com.samsung.android.dqagent
+
+# Default live stickers
+#
+# adb shell pm disable-user --user 0 com.samsung.android.app.camera.sticker.facear.preload
+
+# Default stamps
+#
+# adb shell pm disable-user --user 0 com.samsung.android.app.camera.sticker.stamp.preload
+
+# SEMFactoryApp
+#
+# adb shell pm disable-user --user 0 com.sem.factoryapp
+
+# Samsung Customization Service
+#
+# + allows Samsung apps to use profile data from Samsung account to personalize the experience
+#
+# adb shell pm disable-user --user 0 com.samsung.daydream.customization
+
+# Setup wizard
+#
+# + running android after factory reset
+#
+# adb shell pm disable-user --user 0 com.google.android.setupwizard
+
+# DiagMonAgent
+#
+# adb shell pm disable-user --user 0 com.sec.android.diagmonagent
+
+# Always on Display related
+# + can't change clock
+# adb shell pm disable-user --user 0 com.samsung.android.app.aodservice
+
+#
+# + secure wifi related package
+#
+# adb shell pm disable-user --user 0 com.samsung.android.fast
+
+# Webview
+#
+# + auto enabled when Chrome is uninstalled
+# + auto disabled when Chrome is installed
+#
+# adb shell pm disable-user --user 0 com.google.android.webview
+
+# Air command manager
+#
+# + causing problems
+#
+# adb shell pm disable-user --user 0 com.samsung.android.aircommandmanager
+
+# Iris camera tests
+#
+# + causing problems
+#
+# adb shell pm disable-user --user 0 com.sec.factory.iris.usercamera
+# adb shell pm disable-user --user 0 com.sec.factory.iris.camera
+
+# Safety related
+#
+# + possible problems, need more research
+#
+# adb shell pm disable-user --user 0 com.sec.android.app.safetyassurance
+# adb shell pm disable-user --user 0 com.samsung.safetyinformation
+
+# MDMApp
+#
+# + https://forum.xda-developers.com/galaxy-s6-edge/help/mdmapp-1-0-forces-shutdown-t3381208
+#
+# adb shell pm disable-user --user 0 com.samsung.android.mdm
+
+# ProxyHandler
+#
+# + handling proxy configs and integration with apps.
+# + https://forum.xda-developers.com/general/help/proxyhandler-t3144009
+#
+# adb shell pm disable-user --user 0 com.android.proxyhandler
+
+# SmartThings
+#
+# + beacon seems battery related, do not remove
+# + BUT easysetup could be removed?! Need more research
+#
+# adb shell pm disable-user --user 0 com.samsung.android.beaconmanager
+# adb shell pm disable-user --user 0 com.samsung.android.easysetup
+
+# Battery manangement
+#
+# + also "beaconmanager" from SmartThings
+#
+# pm disable-user --user 0 com.samsung.android.bbc.bbcagent
+
+# adb shell pm disable-user --user 0 com.tmobile.services.nameid
+# adb shell pm disable-user --user 0 com.samsung.tmovvm
+# adb shell pm disable-user --user 0 com.samsung.android.securitylogagent
+# adb shell pm disable-user --user 0 com.sec.imslogger
+# adb shell pm disable-user --user 0 com.sec.android.preloadinstaller
+# adb shell pm disable-user --user 0 com.google.android.packageinstaller
+# adb shell pm disable-user --user 0 com.sec.android.soagent
+# adb shell pm disable-user --user 0 com.samsung.android.fmm
+# adb shell pm disable-user --user 0 com.samsung.android.svcagent
+# adb shell pm disable-user --user 0 com.samsung.android.sdk.professionalaudio.app.audioconnectionservice
+# adb shell pm disable-user --user 0 com.samsung.ucs.agent.ese
+# adb shell pm disable-user --user 0 com.wssyncmldm
+
+# PROBLEMS }}}
+
+# ======================================================
+
+# Irrelevant {{{
+
+# ANDROID
+# =======
+
+# DeviceTest
+#
+# + https://androidforums.com/threads/what-is-factory-test-and-can-i-delete-it.501511/
+# + you loose some hidden menus (not important)
+#
+# adb shell pm disable-user --user 0 com.sec.factory
+
+# Irrelevant }}}
+
+# ======================================================
+I reorganized it, into 8 categories:
+INFO
+Obvious Bloatware -> junk (subjective), you likely would want gone
+Apps -> stuff, you could like (subjective)
+Services I might need -> Useful (subjective) services, that could be removed (theoretically)
+Vital Services -> Services that if removed, affects a lot stuff (Google sync), depends on what you want
+Unknown consequences -> I have no idea what removal of some of these could affect, documentation on each is required
+Problems -> from my research if you remove these, you are in for some troubles, but please research again
+Irrelevant -> stuff you should let be, it does not bother you
+
+Almost all categories are split by "provider": Google, Samsung, Android etc.
+As you see some disabled commands are commented, some are not. This is how I use the script. I have no problems with the phone so it's a good starting point for you. I also disabled some stuff from "Unknown consequences" and I found no problems. But don't start disabling stuff from these categories without doing your research!!!!!!!
+
+The format is like this
+Category X {{{
+.....
+Category X }}}
+===========
+Category Y {{{
+.....
+Category }}}
+
+So what's between {{{ }}} is for that category, be careful not to mix categories up. I didn't know how to organize it better. Hope it makes sense.
+
+If you find info on package, consequences etc. Please share so I can update the script.
+
+I am not responsible for anything :). All credit goes to sea-wa, for providing the package lists.
+Last edited: Mar 6, 2019
+Like Reactions:bilbaro, jsusang, ahmetdamar and 35 others
+Jammol
+Jammol
+Senior Member
+Mar 6, 2019 at 5:32 AM
+#2
+bbtdev said:
+Hello,
+Maybe I could reorganize it somehow.
+Holy goat nipples batman, you're awesome sir! I'll be using this badly for sure this weekend!!!??
+bbtdev
+Member 
+Mar 6, 2019 at 7:39 AM
+#3
+Jammol said:
+Holy goat nipples batman, you're awesome sir! I'll be using this badly for sure this weekend!!!?
+Thanks bro, I just reorganized the script. It should be better now.
+Like Reactions:dragunbayne and Jammol
+Nastrahl
+Nastrahl
+Senior Member
+Mar 6, 2019 at 8:42 AM
+#4
+Hi,
+
+Just a little confusion about Android Web View, as it is automatically enable when Chrome is uninstalled and not the other way around.
+bbtdev
+Member 
+Mar 6, 2019 at 9:47 AM
+#5
+Nastrahl said:
+Hi,
+
+Just a little confusion about Android Web View, as it is automatically enable when Chrome is uninstalled and not the other way around.
+That's the info I found, I haven't tried it. I think the logic is, it needs something to view pages with, so that's why it auto enables.
+avatar_ro
+avatar_ro
+Senior Member
+Mar 6, 2019 at 11:00 AM
+#6
+Nice work man, did someone test this?
+bbtdev
+Member 
+Mar 6, 2019 at 11:06 AM
+#7
+avatar_ro said:
+Nice work man, did someone test this?
+I ran it on my phone, zero problems.
+K-alz
+K-alz
+Senior Member
+Mar 6, 2019 at 12:28 PM
+#8
+Did your phone just fly out of your hand from the extra speed it gained after removing all this crap?
+I'm coming back to this on my day off. Some stuff I actually want disable permanently. Lol
+Nastrahl
+Nastrahl
+Senior Member
+Mar 6, 2019 at 1:43 PM
+#9
+bbtdev said:
+That's the info I found, I haven't tried it. I think the logic is, it needs something to view pages with, so that's why it auto enables.
+Sorry I must have been not very clear since English is not my native language.
+
+What I wanted to say is that you commented that WebView is enabled when you install Chrome and vice versa, but it's actually the opposite : it disables itself when Chrome is installed and enables itself when you uninstall Chrome.
+Like Reactions:Jammol
+Jammol
+Jammol
+Senior Member
+Mar 6, 2019 at 2:30 PM
+#10
+Nastrahl said:
+Sorry I must have been not very clear since English is not my native language.
+
+What I wanted to say is that you commented that WebView is enabled when you install Chrome and vice versa, but it's actually the opposite : it disables itself when Chrome is installed and enables itself when you uninstall Chrome.
+Yeah that's the correct way it works.??
+bbtdev
+Member 
+Mar 6, 2019 at 5:00 PM
+#11
+Nastrahl said:
+Sorry I must have been not very clear since English is not my native language.
+
+What I wanted to say is that you commented that WebView is enabled when you install Chrome and vice versa, but it's actually the opposite : it disables itself when Chrome is installed and enables itself when you uninstall Chrome.
+Ah yes, it was a typo
+Last edited: Mar 6, 2019
+galaxys
+galaxys
+Senior Member
+Mar 12, 2019 at 9:06 PM
+#12
+Awesome and Bookmarked! Just what I was looking for! Kudos
+vonDubenshire
+Senior Member
+Mar 27, 2019 at 6:46 PM
+#13
+I can uninstall OneUI by removing om.sec.android.app.launcher
+
+with no issues??
+
+---------- Post added at 01:46 PM ---------- Previous post was at 01:46 PM ----------
+
+EDIT I will have Lawnchair Launcher installed.
+Nastrahl
+Nastrahl
+Senior Member
+Mar 28, 2019 at 7:46 AM
+#14
+vonDubenshire said:
+I can uninstall OneUI by removing om.sec.android.app.launcher
+
+with no issues??
+
+---------- Post added at 01:46 PM ---------- Previous post was at 01:46 PM ----------
+
+EDIT I will have Lawnchair Launcher installed.
+You won't be able to use the task manager nor hiding the button bars and use it with gestures anymore.
+vonDubenshire
+Senior Member
+Mar 28, 2019 at 3:17 PM
+#15
+Nastrahl said:
+You won't be able to use the task manager nor hiding the button bars and use it with gestures anymore.
+Interesting.
+
+What if I am trying to use GoodLock's task manager thing -- is that just modifying the OneUI Launcher? Which won't work if I remove it.
+
+It's no big deal, I am just curious about what happens.
+Nastrahl
+Nastrahl
+Senior Member
+Mar 28, 2019 at 4:01 PM
+#16
+vonDubenshire said:
+Interesting.
+
+What if I am trying to use GoodLock's task manager thing -- is that just modifying the OneUI Launcher? Which won't work if I remove it.
+
+It's no big deal, I am just curious about what happens.
+Good question.
+
+Since I didn't try with Pie yet (module were unavailable at first)
+
+I'm curious too
+dragunbayne
+Senior Member
+Apr 1, 2019 at 6:35 PM
+#17
+Gave you thanks on a couple of your posts for this. It's nice to have it categorized and explanations on things. Most debloat lists lack those things which makes them sketchy if you want certain things. Like I use a Gear S3 watch and Dex. Most lists or scripts would just kill those and I would be left not knowing what I need back. You rock!
+Jostian
+Jostian
+Senior Member
+Apr 11, 2019 at 8:31 PM
+#18
+when I use the adb shell pm enable --user 0 <package name> command to re enable a disabled app I get an error /system/bin/sh : adb not found error? any ideas, the disabling and uninstall commands work fine.
+SINGULAR007
+New member
+Apr 25, 2019 at 2:33 AM
+#19
+Noob question...... how do I run this script on my note 9.:confused:
+Snowby123
+Snowby123
+Senior Member
+Apr 26, 2019 at 6:26 AM
+#20
+SINGULAR007 said:
+Noob question...... how do I run this script on my note 9.:confused:
+This thread is really a combination of this thread
+https://www.xda-developers.com/disable-system-app-bloatware-android/ and this one
+https://www.xda-developers.com/uninstall-carrier-oem-bloatware-without-root-access/
+Follow the instructions on those.
+Like Reactions:TheToiletSpaula
+1
+2
+Next
+You must log in or register to reply here.
+Share:
+Facebook
+Twitter
+Reddit
+WhatsApp
+Email
+Link
+Samsung Galaxy Note 9 Guides, News, & Discussion
+
+•••
+
+NEW POSTS
+[Android 4.1+] HeadUnit Reloaded for Android Auto with Wifi
+Latest: Emil Borconi 7 minutes ago
+Paid Software Announcement and Discussion
+Samsung Insights discussion
+Latest: lolsmileyface13 7 minutes ago
+AT&T Galaxy Note 3 General
+gkatz123
+Screen display fine, but touch unresponsive
+Latest: gkatz123 8 minutes ago
+Essential Phone Questions & Answers
+HippoMan
+Magisk General Support / Discussion
+Latest: HippoMan 8 minutes ago
+Magisk
+erad1
+[ROM][11][UNOFFICIAL] BootleggersROM Alpha Testing RIMBON[ENCHILADA]
+Latest: erad1 8 minutes ago
+OnePlus 6 ROMs, Kernels, Recoveries, & Other Devel
+OUR APPS
+Get our official app!
+The best way to access XDA on your phone
+Nav Gestures
+Add swipe gestures to any Android
+One Handed Mode
+Eases uses one hand with your phone
+XDA Developers Forums
+XDA Developers was founded by developers, for developers. It is now a valuable resource for people who want to make the most of their mobile devices, from customizing the look and feel to adding new functionality.
+
+Crafted by Audentio
+MORE INFO
+Contact us
+Advertise
+Terms and rules
+Suggest Content
+USEFUL LINKS
+Software Update Download
+Root Any Device
+How to Guides
+XDA’s Best
+Recognized Developer Program
+SUBSCRIBE TO OUR NEWSLETTER
+Receive the freshest Android & development news right in your inbox!
+your@email
+
+XDA - Dark
